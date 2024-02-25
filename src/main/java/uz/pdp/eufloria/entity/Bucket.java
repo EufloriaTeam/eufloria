@@ -19,7 +19,6 @@ import java.util.List;
 public class Bucket extends AbsUUIDEntity {
     @OneToOne
     private User user;
-
     @ManyToMany
     private List<Plant> plants;
 }
