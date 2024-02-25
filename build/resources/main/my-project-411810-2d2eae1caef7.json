@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "my-project-411810",
+  "private_key_id": "2d2eae1caef7aba701edeb6d54c0f5aa64c46348",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCcZRpVVymgB0tt\n9kzYQ7+uTruaiYwd4cLr2Ut2E9qMzmEl9fGOxD7jMG9jLfuZDY5vD7yYw1R6hBGU\nsB3JQF+lWKbgdqyV75hLGvlfySiQvBZm6gjzKVfVD1sT2BQptFkZhS1A+5OpV6Gw\nSPkzAwZcjb2cgLc7RGRax2locs3bYU5O831dZ9hGC3/NFCVPECkp6I50rHkndllz\nH4DbCI5rAxJQ4JmrcUEQTbs7xKxlWOCHkJDOE0eO8VVSjk4MpH/E+h8VwEUaeufV\nTuqazVsZd2XaJMRiifr7BQM18ACA2HjgoovyGVj4zaWM/JmBM+xn1WmF+c+O+j2r\ncxIM/rLNAgMBAAECggEAD2e4FdLtozlEuVKrFBxsS6euvBSzbBgaYq/3Smy/OOJ1\nWE9nGWiER020kyDq6RMYRiFXMvb+ocjTkIFelb3VDgzy9yZJbsV4i2FfUguXBta4\nIDAKbKVUZQTLtGMy7T66DhT7taxySZp7r0ko3tj77e76T+mv4tMkTXraC7NPSr4d\n7g3EfLXnf8vDUdF6fmBVmBGZP9r24ZO7QzDEku81FHXWc5VEBGK6FkJDMXbQbllk\nCU2GssZRypL+946WTrECSpknlWfJWKxqiezIY0FL7YjWlNikGJOPcV6IuOJXUPlQ\nmxBnFxPbjucMYj/GkNKsTxID3Cpv3rJ+QfWEj0xtIQKBgQDaYYiUnLL+57Y05wck\nOYSPkD9e+LO6CkVbli24CVAEBQ0fmQb4mWQM7mwbWABw+BzRfH7xYFANQHaobpoh\nD5RrAp5CQ8cqyFzB8J1Oy82jo6NLKJTF2GMvs3Rc55xY0Bn88dYl8MxV3ME08Jz/\noHccQBKcNCxKqiwKTh01qvy9fQKBgQC3VgXI1JkpKyByO/lIZD/q4Rf96nwZF5NY\nXIRXypJU1gg7qzDyrUGC2axthHj9I+rjIuE+BXx1dTY6LtyvU70PzEZmwvfnNKSS\n5Pp78YMhNcDn91QdqTxYrRr8gHMYKZdC1TM4ewwR5Bbv+XW3ei1pUT+LBvW/ss32\n6SbjMO8LkQKBgQCCdvxy1H73XJT1XARfNuGkJyhE483z2kj/Y2Qi66VbEW16sCCD\nCpjERPhfCZ8R3pjQ6lCogcKxeA6rp4/7KmSf3auQqQ9m1tbbopVISueq2IsozrC6\n1gDDsbFWA6TbRlAQVqZ6ejaJIV5n80vISCSAwyKbIWxImwu+iFZZBrMBvQKBgGg8\nS2uknDQQ5hCs0o17GfAj7G0cPVRS2B5b846qiModKm8qZNkE8oM/2U4nDFb4bdqY\nATIvElUBwEQSUryIQqzRupFAdowInS07bMK9TI28LyJzt2ppxvqv6PD44vcw5mRE\nLSwGoZUmdngX//rCR0FixVr5KQ3Fzl58rvRq5O5RAoGBAII0tMSDDQ2ZVCb4p6Sw\nZG9fDC0lBjjHPJ088arJF3PBctEaaGIiXsiAJvYA3qqqG3BfT8NDe8hLsKb3FyQg\nJ7ug8DxmIP8i6nevWGiAv9Y+Ky5uBRO/xB/B1SyZ9v5AbcXDiRSIzUqEEZULv8+q\nNC9KJKShY7MWIoHtHuA3T90m\n-----END PRIVATE KEY-----\n",
+  "client_email": "eufloria-admin@my-project-411810.iam.gserviceaccount.com",
+  "client_id": "107343152808059337285",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/eufloria-admin%40my-project-411810.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

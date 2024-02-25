@@ -13,5 +13,5 @@ import java.util.UUID;
 public abstract class AbsUUIDEntity {
     @Id
     @Column(columnDefinition = "uuid default gen_random_uuid()")
-    private UUID id;
+    protected UUID id;
 }

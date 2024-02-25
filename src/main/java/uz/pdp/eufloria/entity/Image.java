@@ -2,16 +2,16 @@ package uz.pdp.eufloria.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import uz.pdp.eufloria.entity.template.AbsUUIDEntity;
 
+import java.util.UUID;
+
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Image extends AbsUUIDEntity {
     @Column(nullable = false)
@@ -24,4 +24,12 @@ public class Image extends AbsUUIDEntity {
     private String contentType;
 
     private long size;
+
+    public Image(UUID id, String name, String originalName, String contentType, long size) {
+        this.id = id;
+        this.name = name;
+        this.originalName = originalName;
+        this.contentType = contentType;
+        this.size = size;
+    }
 }
