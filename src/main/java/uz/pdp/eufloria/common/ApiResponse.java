@@ -1,7 +1,10 @@
 package uz.pdp.eufloria.common;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class ApiResponse<E> {
     private final boolean success;
     private String message;
@@ -41,5 +44,8 @@ public class ApiResponse<E> {
 
     public static ApiResponse<ErrorData> failResponse(String msg  , int errorCode) {
         return new ApiResponse<>(List.of(new ErrorData(errorCode, msg)));
+    }
+    public static ApiResponse<ErrorData> failResponse(ApiException apiException) {
+        return new ApiResponse<>(apiException.getErrors());
     }
 }

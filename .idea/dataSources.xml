@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://eufloria-db-eufloria.a.aivencloud.com:11276/eufloria-db?ssl=require</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="eufloria-db@eufloria-db.cz00yog6gtzn.us-east-1.rds.amazonaws.com" uuid="f7fe3e4b-a3a6-4349-8722-b34418a898e9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://eufloria-db.cz00yog6gtzn.us-east-1.rds.amazonaws.com:5432/eufloria-db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
