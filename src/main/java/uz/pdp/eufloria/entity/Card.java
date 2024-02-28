@@ -34,5 +34,7 @@ public class Card extends AbsUUIDEntity {
     @Column(nullable = false, unique = true)
     private String number;
 
+    private double balance;
+
     private String cvc;
 }
