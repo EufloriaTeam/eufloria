@@ -1,10 +1,7 @@
 package uz.pdp.eufloria.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import uz.pdp.eufloria.entity.template.AbsUUIDEntity;
 
 import java.util.List;
@@ -32,6 +29,10 @@ public class User extends AbsUUIDEntity {
 
     @ManyToMany
     private List<Address> addresses;
+
+    @OneToOne
+    @ToString.Exclude
+    private Bucket bucket;
 
     // may change to enum
     @ManyToOne

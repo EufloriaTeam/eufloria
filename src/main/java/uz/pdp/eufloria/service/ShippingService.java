@@ -44,9 +44,13 @@ public class ShippingService extends GenericService<Shipping, UUID, Shipping, Sh
 
         if (Objects.isNull(shippingDto.getName()))
             errorMessages.add("Name cannot be null");
+        else if (shippingDto.getName().isBlank())
+            errorMessages.add("Name cannot be blank");
 
         if (Objects.isNull(shippingDto.getType()))
             errorMessages.add("Type cannot be null");
+        else if (shippingDto.getType().isBlank())
+            errorMessages.add("Type cannot be blank");
         else if (!isTypeFound(shippingDto.getType()))
             errorMessages.add("Wrong type of shipping");
 

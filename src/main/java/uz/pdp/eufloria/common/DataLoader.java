@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import uz.pdp.eufloria.entity.Role;
+import uz.pdp.eufloria.entity.User;
 import uz.pdp.eufloria.repository.RoleRepository;
+import uz.pdp.eufloria.repository.UserRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -16,6 +19,7 @@ public class DataLoader implements CommandLineRunner {
     private String ddlMode;
 
     private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
 
     @Override
     public void run(String... args) {
@@ -23,7 +27,11 @@ public class DataLoader implements CommandLineRunner {
             Role adminRole = new Role("ADMIN_ROLE");
             Role userRole = new Role("USER_ROLE");
             Role superAdminRole = new Role("SUPER_ADMIN_ROLE");
+
+            User user = new User("Rakhim", "rakhim.des@gmail.com", "12313Ab", null, null, null,null, adminRole);
+            user.setId(UUID.randomUUID());
             roleRepository.saveAll(List.of(adminRole, userRole, superAdminRole));
+            userRepository.save(user);
         }
     }
 }
