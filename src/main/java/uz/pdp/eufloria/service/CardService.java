@@ -4,11 +4,13 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import uz.pdp.eufloria.common.ApiException;
 import uz.pdp.eufloria.dto.card.CardCreateDto;
 import uz.pdp.eufloria.dto.card.CardDtoMapper;
 import uz.pdp.eufloria.dto.card.CardResponseDto;
 import uz.pdp.eufloria.dto.card.CardUpdateDto;
 import uz.pdp.eufloria.entity.Card;
+import uz.pdp.eufloria.entity.enums.CardType;
 import uz.pdp.eufloria.repository.CardRepository;
 
 import java.util.Random;
@@ -26,11 +28,14 @@ public class CardService extends GenericService<Card, UUID, CardResponseDto, Car
     @Override
     protected CardResponseDto internalCreate(CardCreateDto cardCreateDto) {
         Card entity = mapper.toEntity(cardCreateDto);
+        setType(cardCreateDto, entity);
         entity.setId(UUID.randomUUID());
+        // todo validate number
         entity.setCvc(getCvc());
         Card savedCard = repository.save(entity);
         return mapper.toResponseDto(savedCard);
     }
+
 
     @Override
     protected CardResponseDto internalUpdate(UUID uuid, CardUpdateDto cardUpdateDto) {
@@ -42,6 +47,21 @@ public class CardService extends GenericService<Card, UUID, CardResponseDto, Car
 
         Card saved = repository.save(card);
         return mapper.toResponseDto(saved);
+    }
+
+    private void setType(CardCreateDto cardCreateDto, Card entity) {
+        String typeUpper = cardCreateDto.getType().toUpperCase();
+        boolean isFound = false;
+        for (var type : CardType.values()) {
+            if (typeUpper.equals(type.name())) {
+                isFound = true;
+                break;
+            }
+        }
+        if (!isFound) {
+            throw ApiException.throwException("Type is not found");
+        }
+        entity.setType(CardType.valueOf(typeUpper));
     }
 
     private String getCvc() {

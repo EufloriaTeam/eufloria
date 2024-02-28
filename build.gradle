@@ -27,6 +27,7 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:3.2.0'
     implementation 'cz.jirutka.rsql:rsql-parser:2.1.0'
     implementation 'com.google.cloud:google-cloud-storage:2.20.1'
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
     compileOnly 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.3'
     runtimeOnly 'org.postgresql:postgresql'

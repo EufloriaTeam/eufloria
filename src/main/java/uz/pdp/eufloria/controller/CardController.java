@@ -34,7 +34,7 @@ public class CardController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CardResponseDto> getId(@PathVariable UUID id) {
+    public ResponseEntity<CardResponseDto> getById(@PathVariable UUID id) {
         CardResponseDto responseDto = service.get(id);
         return ResponseEntity.ok(responseDto);
     }
