@@ -33,7 +33,7 @@ public class ShippingService extends GenericService<Shipping, UUID, Shipping, Sh
     protected Shipping internalUpdate(UUID id, ShippingDto shippingDto) {
         isValid( shippingDto);
         Shipping enShipping = get(id);
-        mapper.toEntity(shippingDto, enShipping);
+        mapper.toUpdate(shippingDto, enShipping);
         return repository.save(enShipping);
     }
 
