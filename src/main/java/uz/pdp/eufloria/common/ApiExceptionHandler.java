@@ -8,6 +8,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.nio.file.AccessDeniedException;
+
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
@@ -33,6 +35,12 @@ public class ApiExceptionHandler {
     public ResponseEntity<ApiResponse<?>> handleException(MethodArgumentNotValidException e) {
         ApiResponse<ErrorData> response = ApiResponse.respond(false, e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ApiResponse<?>> handleException(AccessDeniedException e) {
+        ApiResponse<Object> response = ApiResponse.respond(false, e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(Exception.class)

@@ -8,5 +8,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  security:
+    jwt:
+      token:
+        expiration: 86400
+        secret: QV9leUa5bTqgfO2xxlITYDnaqrpqsWM37DjVYghhlr5YC+F6LCYhUhUg8gLjx+4C
 gsc:
   serviceAccountKeyPath: src/main/resources/my-project-411810-2d2eae1caef7.json
