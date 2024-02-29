@@ -11,12 +11,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 @SpringBootApplication
+@EnableMethodSecurity
+@EnableWebSecurity
 public class EufloriaApplication {
     @Value("${gsc.serviceAccountKeyPath}")
     private String serviceAccountKeyPath;
