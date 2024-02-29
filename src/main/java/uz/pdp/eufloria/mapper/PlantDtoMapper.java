@@ -3,9 +3,9 @@ package uz.pdp.eufloria.mapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import uz.pdp.eufloria.dto.plantDto.PlantCreateDto;
-import uz.pdp.eufloria.dto.plantDto.PlantResponseDto;
-import uz.pdp.eufloria.dto.plantDto.PlantUpdateDto;
+import uz.pdp.eufloria.dto.plant.PlantCreateDto;
+import uz.pdp.eufloria.dto.plant.PlantResponseDto;
+import uz.pdp.eufloria.dto.plant.PlantUpdateDto;
 import uz.pdp.eufloria.entity.Plant;
 
 @Component

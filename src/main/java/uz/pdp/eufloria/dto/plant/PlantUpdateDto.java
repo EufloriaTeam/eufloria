@@ -1,4 +1,4 @@
-package uz.pdp.eufloria.dto.plantDto;
+package uz.pdp.eufloria.dto.plant;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
