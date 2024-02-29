@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PlantService extends GenericService<Plant, UUID, PlantResponseDto, PlantCreateDto, PlantUpdateDto> {
     private final PlantRepository repository;
-    private final Class<Plant> entityClass=Plant.class;
+    private final Class<Plant> entityClass = Plant.class;
     private final PlantDtoMapper mapper;
 
     @Override
@@ -33,9 +33,9 @@ public class PlantService extends GenericService<Plant, UUID, PlantResponseDto, 
     protected PlantResponseDto internalUpdate(UUID uuid, PlantUpdateDto plantUpdateDto) {
         Plant plant = repository.findById(uuid)
                 .orElseThrow(
-                        () -> new EntityNotFoundException(" Plant not found")
+                        () -> new EntityNotFoundException("Plant not found")
                 );
-        mapper.toEntity(plantUpdateDto,plant);
+        mapper.toEntity(plantUpdateDto, plant);
         Plant saved = repository.save(plant);
         return mapper.toResponseDto(saved);
     }
