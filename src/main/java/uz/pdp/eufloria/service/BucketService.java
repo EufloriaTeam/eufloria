@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uz.pdp.eufloria.common.ApiException;
-import uz.pdp.eufloria.dto.BucketResponseDto;
+import uz.pdp.eufloria.dto.bucket.BucketResponseDto;
 import uz.pdp.eufloria.entity.Bucket;
 import uz.pdp.eufloria.entity.BucketItem;
 import uz.pdp.eufloria.entity.Plant;

@@ -6,9 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.eufloria.dto.plantDto.PlantCreateDto;
-import uz.pdp.eufloria.dto.plantDto.PlantResponseDto;
-import uz.pdp.eufloria.dto.plantDto.PlantUpdateDto;
+import uz.pdp.eufloria.dto.plant.PlantCreateDto;
+import uz.pdp.eufloria.dto.plant.PlantResponseDto;
+import uz.pdp.eufloria.dto.plant.PlantUpdateDto;
 import uz.pdp.eufloria.service.PlantService;
 
 import java.util.UUID;

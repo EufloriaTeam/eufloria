@@ -1,6 +1,7 @@
 package uz.pdp.eufloria.common;
 
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -39,12 +40,9 @@ public class ApiResponse<E> {
     }
 
     public static <T> ApiResponse<T> respond(boolean isSuccess, String message) {
-        return new ApiResponse<>(isSuccess,message);
+        return new ApiResponse<>(isSuccess, message);
     }
 
-    public static ApiResponse<ErrorData> failResponse(String msg  , int errorCode) {
-        return new ApiResponse<>(List.of(new ErrorData(errorCode, msg)));
-    }
     public static ApiResponse<ErrorData> failResponse(ApiException apiException) {
         return new ApiResponse<>(apiException.getErrors());
     }

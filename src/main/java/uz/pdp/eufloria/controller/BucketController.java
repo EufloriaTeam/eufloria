@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.eufloria.common.ApiResponse;
 import uz.pdp.eufloria.common.AppConstants;
-import uz.pdp.eufloria.dto.BucketResponseDto;
-import uz.pdp.eufloria.entity.Plant;
+import uz.pdp.eufloria.dto.bucket.BucketResponseDto;
 import uz.pdp.eufloria.service.BucketService;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ public class BucketController {
     }
 
     @DeleteMapping("/{plantId}")
-    public ApiResponse<BucketResponseDto> addToBucket(@PathVariable UUID plantId) {
+    public ApiResponse<BucketResponseDto> removeFromBucket(@PathVariable UUID plantId) {
         return ApiResponse.body(service.removeFromBucket(plantId));
     }
 }

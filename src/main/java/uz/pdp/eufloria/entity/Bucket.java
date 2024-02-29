@@ -2,13 +2,11 @@ package uz.pdp.eufloria.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.eufloria.dto.BucketItemResDto;
-import uz.pdp.eufloria.dto.BucketResponseDto;
+import uz.pdp.eufloria.dto.bucket.BucketItemResDto;
+import uz.pdp.eufloria.dto.bucket.BucketResponseDto;
 import uz.pdp.eufloria.entity.template.AbsUUIDEntity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;

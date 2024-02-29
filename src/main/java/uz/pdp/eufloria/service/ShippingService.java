@@ -67,4 +67,8 @@ public class ShippingService extends GenericService<Shipping, UUID, Shipping, Sh
             }
         return typeFound;
     }
+
+    public List<ShippingType> getTypes() {
+        return List.of(ShippingType.values());
+    }
 }

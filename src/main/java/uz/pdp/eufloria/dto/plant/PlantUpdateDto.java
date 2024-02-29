@@ -1,4 +1,4 @@
-package uz.pdp.eufloria.dto.plantDto;
+package uz.pdp.eufloria.dto.plant;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PlantCreateDto {
+public class PlantUpdateDto {
     private String name;
 
     private String description;
