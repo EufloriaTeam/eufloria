@@ -1,5 +1,6 @@
 package uz.pdp.eufloria.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,13 +21,13 @@ public class PlantController {
     private final PlantService plantService;
 
     @PostMapping
-    public ResponseEntity<PlantResponseDto> create(@RequestBody PlantCreateDto createDto) {
+    public ResponseEntity<PlantResponseDto> create(@RequestBody @Valid PlantCreateDto createDto) {
         PlantResponseDto responseDto = plantService.create(createDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     @GetMapping
-    public ResponseEntity<Page<PlantResponseDto>> get(@RequestParam String predicate, Pageable pageable) {
+    public ResponseEntity<Page<PlantResponseDto>> get(@RequestParam(required = false) String predicate, Pageable pageable) {
         Page<PlantResponseDto> all = plantService.getAll(predicate, pageable);
         return ResponseEntity.ok(all);
     }

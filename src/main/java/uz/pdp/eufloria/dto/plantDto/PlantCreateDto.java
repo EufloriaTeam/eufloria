@@ -1,5 +1,6 @@
 package uz.pdp.eufloria.dto.plantDto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,11 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class PlantCreateDto {
+    @NotNull
     private String name;
-
     private String description;
-
     private double price;
-
     private double discount;
 }

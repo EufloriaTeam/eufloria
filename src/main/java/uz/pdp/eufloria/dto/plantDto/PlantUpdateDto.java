@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class PlantUpdateDto {
     private String name;
-
     private String description;
-
     private double price;
-
     private double discount;
 }
