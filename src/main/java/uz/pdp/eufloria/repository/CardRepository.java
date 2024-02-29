@@ -7,4 +7,5 @@ import java.util.UUID;
 
 @Repository
 public interface CardRepository extends GenericRepository<Card, UUID> {
+    boolean existsByNumber(String number);
 }
