@@ -17,19 +17,15 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Bucket extends AbsUUIDEntity {
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private User user;
 
-    @OneToMany(mappedBy = "bucket")
+    @OneToMany(mappedBy = "bucket", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<BucketItem> items = new ArrayList<>();
 
     public Bucket(User user) {
         this.id = UUID.randomUUID();
         this.user = user;
-    }
-
-    public void addItem(Plant plant, int amount) {
-        items.add(new BucketItem(plant, this, amount));
     }
 
     public BucketResponseDto toResponseDto() {

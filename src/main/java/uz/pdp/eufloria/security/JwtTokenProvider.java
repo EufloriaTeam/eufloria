@@ -30,6 +30,9 @@ public class JwtTokenProvider {
     }
 
     public String claimFromToken(String token) {
+        if (token.startsWith(AppConstants.TOKEN_TYPE))
+            token = token.substring(AppConstants.TOKEN_TYPE.length());
+
         return Jwts.parserBuilder()
                 .setSigningKey(signingKey())
                 .build()

@@ -13,9 +13,10 @@ import uz.pdp.eufloria.entity.User;
 import uz.pdp.eufloria.repository.BucketItemRepository;
 import uz.pdp.eufloria.repository.BucketRepository;
 import uz.pdp.eufloria.repository.PlantRepository;
+import uz.pdp.eufloria.repository.UserRepository;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -23,6 +24,7 @@ import java.util.UUID;
 public class BucketService {
     private final BucketRepository repository;
     private final BucketItemRepository bucketItemRepository;
+    private final UserRepository userRepository;
     private final PlantRepository plantRepository;
 
     @Transactional
@@ -31,11 +33,20 @@ public class BucketService {
         User user = CommonUtils.getCurrentUser();
 
         Bucket bucket = getOrCreateBucket(user);
+        BucketItem item = new BucketItem(plant, bucket, amount);
+        List<BucketItem> items = bucket.getItems();
+        int index = items.indexOf(item);
+        if (index >= 0) {
+            if (items.get(index).getAmount() == amount)
+                return bucket.toResponseDto();
 
-        BucketItem bucketItem = new BucketItem(plant, bucket, amount);
-        bucketItemRepository.save(bucketItem);
+            item.setAmount(amount);
+            items.set(index, item);
+        } else
+            items.add(item);
 
-        bucket.addItem(plant, amount);
+        bucketItemRepository.save(item);
+        bucket.setItems(items);
         return repository.save(bucket).toResponseDto();
     }
 
@@ -48,22 +59,21 @@ public class BucketService {
             throw ApiException.throwException("You have no bucket");
         }
 
-        Plant plant = plantRepository.findById(plantId).orElseThrow(()-> ApiException.throwException("Plant not found"));
-        BucketItem item = getPlantFromBucket(bucket, plant);
-        bucket.getItems().remove(item);
-        bucketItemRepository.deleteById(item.getBucketId());
+        Plant plant = plantRepository.findById(plantId).orElseThrow(() -> ApiException.throwException("Plant not found"));
+        int index = bucket.getItems().indexOf(new BucketItem(plant, bucket));
+        if (index < 0)
+            throw ApiException.throwException("Plant not found in the bucket");
+        bucket.getItems().remove(bucket.getItems().get(index));
+        bucketItemRepository.deleteById(bucket.getItems().get(index).getBucketId());
         return bucket.toResponseDto();
     }
 
-    private BucketItem getPlantFromBucket(Bucket bucket, Plant plant) {
-        Optional<BucketItem> optItem = bucketItemRepository.findByBucketAndPlant(bucket, plant);
-        if (optItem.isEmpty()) {
-            throw ApiException.throwException("Item is not found in the bucket");
-        }
-        return optItem.get();
-    }
-
     private Bucket getOrCreateBucket(User user) {
-        return Objects.isNull(user.getBucket()) ? repository.save(new Bucket(user)) : user.getBucket();
+        if (Objects.isNull(user.getBucket())) {
+            user.setBucket(repository.save(new Bucket(user)));
+            userRepository.save(user);
+            return user.getBucket();
+        }
+        return user.getBucket();
     }
 }
