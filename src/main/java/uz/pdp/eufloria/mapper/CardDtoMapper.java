@@ -25,7 +25,7 @@ public class CardDtoMapper extends GenericMapper<Card, CardCreateDto, CardRespon
     }
 
     @Override
-    public void toEntity(CardUpdateDto cardUpdateDto, Card card) {
+    public void toUpdate(CardUpdateDto cardUpdateDto, Card card) {
         mapper.map(cardUpdateDto, card);
     }
 
