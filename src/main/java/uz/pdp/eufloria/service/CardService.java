@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eufloria.common.ApiException;
 import uz.pdp.eufloria.dto.card.CardCreateDto;
-import uz.pdp.eufloria.dto.card.CardDtoMapper;
+import uz.pdp.eufloria.mapper.CardDtoMapper;
 import uz.pdp.eufloria.dto.card.CardResponseDto;
 import uz.pdp.eufloria.dto.card.CardUpdateDto;
 import uz.pdp.eufloria.entity.Card;

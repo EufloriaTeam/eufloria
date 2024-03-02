@@ -1,11 +1,13 @@
 package uz.pdp.eufloria.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ApiResponse<E> {
     private final boolean success;
     private String message;
