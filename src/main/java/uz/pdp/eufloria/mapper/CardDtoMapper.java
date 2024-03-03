@@ -1,8 +1,11 @@
-package uz.pdp.eufloria.dto.card;
+package uz.pdp.eufloria.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import uz.pdp.eufloria.dto.card.CardCreateDto;
+import uz.pdp.eufloria.dto.card.CardResponseDto;
+import uz.pdp.eufloria.dto.card.CardUpdateDto;
 import uz.pdp.eufloria.entity.Card;
 import uz.pdp.eufloria.mapper.GenericMapper;
 

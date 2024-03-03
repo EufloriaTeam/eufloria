@@ -1,15 +1,13 @@
 package uz.pdp.eufloria.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
+@EqualsAndHashCode
 @Data
 @NoArgsConstructor
 public class BucketItem {
@@ -27,12 +25,13 @@ public class BucketItem {
     @ToString.Exclude
     private Bucket bucket;
 
+    @EqualsAndHashCode.Exclude
     private int amount = 1;
 
     @Embeddable
+    @EqualsAndHashCode
     @AllArgsConstructor
     @NoArgsConstructor
-    @Data
     public static class BucketId implements Serializable {
         private UUID plantId;
         private UUID bucketId;
@@ -49,5 +48,9 @@ public class BucketItem {
         this.bucketId = new BucketId(plant.getId(), bucket.getId());
         this.plant = plant;
         this.bucket = bucket;
+    }
+
+    public void addMore(int amount) {
+        this.amount += amount;
     }
 }

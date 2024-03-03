@@ -1,13 +1,14 @@
 package uz.pdp.eufloria.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import uz.pdp.eufloria.entity.enums.OrderStatus;
 import uz.pdp.eufloria.entity.template.AbsUUIDEntity;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "orders")
@@ -15,9 +16,12 @@ import uz.pdp.eufloria.entity.template.AbsUUIDEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order extends AbsUUIDEntity {
-    @OneToOne
-    private Bucket bucket;
+    @OneToMany
+    private List<BucketItem> items;
 
     @ManyToOne
     private Shipping shipping;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 }

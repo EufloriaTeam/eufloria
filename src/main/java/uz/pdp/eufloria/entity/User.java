@@ -24,17 +24,20 @@ public class User extends AbsUUIDEntity {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Plant> favouritePlants;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Card> cards;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Address> addresses;
 
-    @OneToOne
+    @OneToMany
+    private List<Order> orders;
+
+    @OneToOne(fetch = FetchType.EAGER)
     @ToString.Exclude
     private Bucket bucket;
 
     // may change to enum
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Role role;
 }

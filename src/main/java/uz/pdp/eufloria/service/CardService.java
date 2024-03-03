@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.eufloria.common.ApiException;
 import uz.pdp.eufloria.dto.card.CardCreateDto;
-import uz.pdp.eufloria.dto.card.CardDtoMapper;
+import uz.pdp.eufloria.mapper.CardDtoMapper;
 import uz.pdp.eufloria.dto.card.CardResponseDto;
 import uz.pdp.eufloria.dto.card.CardUpdateDto;
 import uz.pdp.eufloria.entity.Card;
@@ -22,15 +22,20 @@ import java.util.UUID;
 public class CardService extends GenericService<Card, UUID, CardResponseDto, CardCreateDto, CardUpdateDto> {
     private final CardRepository repository;
     private static final Random RANDOM = new Random();
-    private final Class<Card> entityClass = Card.class;
+    private final Class<Card> EntityClass = Card.class;
     private final CardDtoMapper mapper;
 
     @Override
     protected CardResponseDto internalCreate(CardCreateDto cardCreateDto) {
         Card entity = mapper.toEntity(cardCreateDto);
+        if (repository.existsByNumber(entity.getNumber())) {
+            throw ApiException.throwException("Number already exist");
+        }
+        if (entity.getNumber().length() != 16) {
+            throw ApiException.throwException("Invalid card number entered");
+        }
         setType(cardCreateDto, entity);
         entity.setId(UUID.randomUUID());
-        // todo validate number
         entity.setCvc(getCvc());
         Card savedCard = repository.save(entity);
         return mapper.toResponseDto(savedCard);
@@ -39,8 +44,7 @@ public class CardService extends GenericService<Card, UUID, CardResponseDto, Car
 
     @Override
     protected CardResponseDto internalUpdate(UUID uuid, CardUpdateDto cardUpdateDto) {
-        Card card = repository.findById(uuid).orElseThrow(
-                () -> new EntityNotFoundException("Card with id %s not found".formatted(uuid)));
+        Card card = repository.findById(uuid).orElseThrow(() -> new EntityNotFoundException("Card with id %s not found".formatted(uuid)));
 
 
         mapper.toEntity(cardUpdateDto, card);

@@ -17,13 +17,9 @@ import uz.pdp.eufloria.entity.template.AbsUUIDEntity;
 public class Plant extends AbsUUIDEntity {
     @Column(nullable = false)
     private String name;
-
     private String description;
-
     private double price;
-
     private double discount;
-
     @OneToOne
     private Image image;
 }

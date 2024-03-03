@@ -28,9 +28,15 @@ public class DataLoader implements CommandLineRunner {
             Role userRole = new Role("USER_ROLE");
             Role superAdminRole = new Role("SUPER_ADMIN_ROLE");
 
-            User user = new User("Rakhim", "rakhim.des@gmail.com", "12313Ab", null, null, null,null, adminRole);
+            User superAdminUser = new User("Rakhim", "rakhimdesanta@gmail.com", "12313Ab", null, null, null,null, null, superAdminRole);
+            User adminUser = new User("Rakhim", "rakhim.des@gmail.com", "12313Ab", null, null, null,null, null, adminRole);
+            User user = new User("Rakhim", "santaclousx1@gmail.com", "12313Ab", null, null, null,null, null, userRole);
+            adminUser.setId(UUID.randomUUID());
+            superAdminUser.setId(UUID.randomUUID());
             user.setId(UUID.randomUUID());
             roleRepository.saveAll(List.of(adminRole, userRole, superAdminRole));
+            userRepository.save(superAdminUser);
+            userRepository.save(adminUser);
             userRepository.save(user);
         }
     }
