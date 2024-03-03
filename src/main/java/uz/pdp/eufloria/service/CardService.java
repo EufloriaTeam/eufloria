@@ -47,7 +47,7 @@ public class CardService extends GenericService<Card, UUID, CardResponseDto, Car
         Card card = repository.findById(uuid).orElseThrow(() -> new EntityNotFoundException("Card with id %s not found".formatted(uuid)));
 
 
-        mapper.toUpdate(cardUpdateDto, card);
+        mapper.toEntity(cardUpdateDto, card);
 
         Card saved = repository.save(card);
         return mapper.toResponseDto(saved);

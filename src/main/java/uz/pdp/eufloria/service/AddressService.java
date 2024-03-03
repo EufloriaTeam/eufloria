@@ -32,7 +32,7 @@ public class AddressService extends GenericService<Address, UUID, Address, Addre
     protected Address internalUpdate(UUID id, AddressDto addressDto) {
         isValid( addressDto);
         Address address = get(id);
-        mapper.toUpdate(addressDto, address);
+        mapper.toEntity(addressDto, address);
         return repository.save(address);
     }
 

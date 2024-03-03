@@ -25,7 +25,7 @@ public class AddressDtoMapper extends GenericMapper<Address, AddressDto, Address
     }
 
     @Override
-    public void toUpdate(AddressDto addressDto, Address address) {
+    public void toEntity(AddressDto addressDto, Address address) {
         mapper.map(addressDto, address);
     }
 }

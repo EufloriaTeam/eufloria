@@ -26,7 +26,7 @@ public class ShippingMapper extends GenericMapper<Shipping, ShippingDto, Shippin
     }
 
     @Override
-    public void toUpdate(ShippingDto shippingDto, Shipping enShipping) {
+    public void toEntity(ShippingDto shippingDto, Shipping enShipping) {
         mapper.map(shippingDto, enShipping);
     }
 }

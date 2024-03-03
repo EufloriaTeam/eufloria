@@ -30,6 +30,9 @@ public class User extends AbsUUIDEntity {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Address> addresses;
 
+    @OneToMany
+    private List<Order> orders;
+
     @OneToOne(fetch = FetchType.EAGER)
     @ToString.Exclude
     private Bucket bucket;

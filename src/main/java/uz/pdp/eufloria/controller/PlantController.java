@@ -39,7 +39,7 @@ public class PlantController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PlantResponseDto> update(@PathVariable UUID id, @RequestBody PlantUpdateDto updateDto) {
+    public ResponseEntity<PlantResponseDto> update(@PathVariable UUID id, @RequestBody @Valid PlantUpdateDto updateDto) {
         PlantResponseDto responseDto = plantService.update(id, updateDto);
         return ResponseEntity.ok(responseDto);
     }
