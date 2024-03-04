@@ -1,18 +1,24 @@
 package uz.pdp.eufloria.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import uz.pdp.eufloria.common.ApiException;
 import uz.pdp.eufloria.dto.card.CardCreateDto;
+import uz.pdp.eufloria.entity.User;
 import uz.pdp.eufloria.mapper.CardDtoMapper;
 import uz.pdp.eufloria.dto.card.CardResponseDto;
 import uz.pdp.eufloria.dto.card.CardUpdateDto;
 import uz.pdp.eufloria.entity.Card;
 import uz.pdp.eufloria.entity.enums.CardType;
 import uz.pdp.eufloria.repository.CardRepository;
+import uz.pdp.eufloria.repository.UserRepository;
 
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -21,12 +27,14 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CardService extends GenericService<Card, UUID, CardResponseDto, CardCreateDto, CardUpdateDto> {
     private final CardRepository repository;
+    private final UserRepository userRepository;
     private static final Random RANDOM = new Random();
     private final Class<Card> EntityClass = Card.class;
     private final CardDtoMapper mapper;
 
     @Override
-    protected CardResponseDto internalCreate(CardCreateDto cardCreateDto) {
+    @Transactional
+    public CardResponseDto internalCreate(CardCreateDto cardCreateDto) {
         Card entity = mapper.toEntity(cardCreateDto);
         if (repository.existsByNumber(entity.getNumber())) {
             throw ApiException.throwException("Number already exist");
@@ -43,9 +51,9 @@ public class CardService extends GenericService<Card, UUID, CardResponseDto, Car
 
 
     @Override
-    protected CardResponseDto internalUpdate(UUID uuid, CardUpdateDto cardUpdateDto) {
+    @Transactional
+    public CardResponseDto internalUpdate(UUID uuid, CardUpdateDto cardUpdateDto) {
         Card card = repository.findById(uuid).orElseThrow(() -> new EntityNotFoundException("Card with id %s not found".formatted(uuid)));
-
 
         mapper.toEntity(cardUpdateDto, card);
 
@@ -70,6 +78,18 @@ public class CardService extends GenericService<Card, UUID, CardResponseDto, Car
 
     private String getCvc() {
         return String.valueOf(RANDOM.nextInt(100, 999));
+    }
+
+    @Transactional
+    public List<Card> getCardsOfUser() {
+        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> ApiException.throwException("User not found exception"));
+
+        if (user.getCards().isEmpty()) {
+            return List.of();
+        }
+        return user.getCards();
     }
 
 }
