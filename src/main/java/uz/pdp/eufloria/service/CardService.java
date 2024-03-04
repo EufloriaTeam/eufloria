@@ -4,21 +4,22 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import uz.pdp.eufloria.common.ApiException;
+import uz.pdp.eufloria.common.CommonUtils;
 import uz.pdp.eufloria.dto.card.CardCreateDto;
-import uz.pdp.eufloria.entity.User;
-import uz.pdp.eufloria.mapper.CardDtoMapper;
 import uz.pdp.eufloria.dto.card.CardResponseDto;
 import uz.pdp.eufloria.dto.card.CardUpdateDto;
 import uz.pdp.eufloria.entity.Card;
+import uz.pdp.eufloria.entity.User;
 import uz.pdp.eufloria.entity.enums.CardType;
+import uz.pdp.eufloria.mapper.CardDtoMapper;
 import uz.pdp.eufloria.repository.CardRepository;
 import uz.pdp.eufloria.repository.UserRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
@@ -90,6 +91,26 @@ public class CardService extends GenericService<Card, UUID, CardResponseDto, Car
             return List.of();
         }
         return user.getCards();
+    }
+    protected Card subtract(UUID cardId, double sum) {
+        User user = CommonUtils.getCurrentUser();
+        Card card = null;
+        for (var c : user.getCards()) {
+            if (Objects.equals(c.getId(), cardId)) {
+                card = c;
+                break;
+            }
+        }
+        if (Objects.isNull(card))
+            throw ApiException.throwException("Something went wrong");
+
+        double balance = card.getBalance();
+        if (balance >= sum) {
+            card.setBalance(balance - sum);
+            return repository.save(card);
+        }
+        else
+            throw ApiException.throwException("Insufficient funds");
     }
 
 }
