@@ -4,5 +4,5 @@ import lombok.Data;
 
 public enum OrderStatus {
     // ONE_TWO
-    IN_STOCK, ACCEPTED, DELIVERED
+    IN_STOCK, ACCEPTED, DELIVERED, PAID, NOT_PAID
 }

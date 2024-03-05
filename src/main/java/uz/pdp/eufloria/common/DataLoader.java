@@ -3,6 +3,7 @@ package uz.pdp.eufloria.common;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import uz.pdp.eufloria.entity.Role;
 import uz.pdp.eufloria.entity.User;
@@ -18,6 +19,7 @@ public class DataLoader implements CommandLineRunner {
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String ddlMode;
 
+    private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
 
@@ -28,9 +30,9 @@ public class DataLoader implements CommandLineRunner {
             Role userRole = new Role("USER_ROLE");
             Role superAdminRole = new Role("SUPER_ADMIN_ROLE");
 
-            User superAdminUser = new User("Rakhim", "rakhimdesanta@gmail.com", "12313Ab", null, null, null,null, null, superAdminRole);
-            User adminUser = new User("Rakhim", "rakhim.des@gmail.com", "12313Ab", null, null, null,null, null, adminRole);
-            User user = new User("Rakhim", "santaclousx1@gmail.com", "12313Ab", null, null, null,null, null, userRole);
+            User superAdminUser = new User("Rakhim", "rakhimdesanta@gmail.com", passwordEncoder.encode("12313Ab"), null, null, null,null, null, superAdminRole);
+            User adminUser = new User("Rakhim", "rakhim.des@gmail.com", passwordEncoder.encode("123123Ab"), null, null, null,null, null, adminRole);
+            User user = new User("Rakhim", "santaclousx1@gmail.com", passwordEncoder.encode("12323Ab"), null, null, null,null, null, userRole);
             adminUser.setId(UUID.randomUUID());
             superAdminUser.setId(UUID.randomUUID());
             user.setId(UUID.randomUUID());
