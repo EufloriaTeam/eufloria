@@ -4,7 +4,6 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import uz.pdp.eufloria.common.ApiException;
@@ -42,10 +41,15 @@ public class CardService extends GenericService<Card, UUID, CardResponseDto, Car
         if (entity.getNumber().length() != 16) {
             throw ApiException.throwException("Invalid card number entered");
         }
+
+        User user = userRepository.findById(cardCreateDto.getUserId()).orElseThrow(() -> ApiException.throwException("User not found exception"));
+
         setType(cardCreateDto, entity);
         entity.setId(UUID.randomUUID());
         entity.setCvc(getCvc());
         Card savedCard = repository.save(entity);
+        user.getCards().add(savedCard);
+        userRepository.save(user);
         return mapper.toResponseDto(savedCard);
     }
 
@@ -83,8 +87,7 @@ public class CardService extends GenericService<Card, UUID, CardResponseDto, Car
     @Transactional
     public List<Card> getCardsOfUser() {
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> ApiException.throwException("User not found exception"));
+        User user = userRepository.findByEmail(userEmail).orElseThrow(() -> ApiException.throwException("User not found exception"));
 
         if (user.getCards().isEmpty()) {
             return List.of();
