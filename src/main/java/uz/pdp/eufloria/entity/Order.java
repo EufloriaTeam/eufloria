@@ -24,4 +24,9 @@ public class Order extends AbsUUIDEntity {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    public Order(List<BucketItem> items, Shipping shipping) {
+        this.items = items;
+        this.shipping = shipping;
+    }
 }
