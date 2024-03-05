@@ -1,7 +1,6 @@
 package uz.pdp.eufloria.controller;
 
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,10 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import uz.pdp.eufloria.dto.card.CardCreateDto;
 import uz.pdp.eufloria.dto.card.CardResponseDto;
 import uz.pdp.eufloria.dto.card.CardUpdateDto;
-import uz.pdp.eufloria.entity.Card;
 import uz.pdp.eufloria.service.CardService;
 
-import java.util.List;
 import java.util.UUID;
 
 
@@ -37,13 +34,6 @@ public class CardController {
     public ResponseEntity<Page<CardResponseDto>> getAll(@RequestParam(required = false) String predicate, Pageable pageable) {
         Page<CardResponseDto> all = service.getAll(predicate, pageable);
         return ResponseEntity.ok(all);
-    }
-
-    @PreAuthorize("hasAuthority('ADMIN_ROLE')")
-    @GetMapping("/userCards")
-    public ResponseEntity<List<Card>> getCardsByUserId() {
-        List<Card> cardsOfUser = service.getCardsOfUser();
-        return ResponseEntity.ok(cardsOfUser);
     }
 
     @PreAuthorize("hasAuthority('ADMIN_ROLE')")

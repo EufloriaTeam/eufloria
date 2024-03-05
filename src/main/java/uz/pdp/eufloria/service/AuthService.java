@@ -45,6 +45,7 @@ public class AuthService {
         if (!passwordEncoder.matches(signInDto.getPassword(), optUser.get().getPassword())) {
             throw ApiException.throwException("Email or password is incorrect");
         }
+
         return authMapper.toResponseDto(optUser.get());
     }
 
