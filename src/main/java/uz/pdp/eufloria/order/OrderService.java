@@ -69,6 +69,9 @@ public class OrderService {
         } else {
             page = orderRepository.findAll(specification, pageable);
         }
+
+
+
         return page.map(entity -> orderDtoMapper.toResponseDto(entity));
     }
 
