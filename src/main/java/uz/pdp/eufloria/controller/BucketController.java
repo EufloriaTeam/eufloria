@@ -1,5 +1,6 @@
 package uz.pdp.eufloria.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class BucketController {
     public static final String BASE_URL = "/bucket";
     private final BucketService service;
 
+    @Operation(description = "Adds a plant to the current users bucket", summary = "Add To Bucket")
     @PreAuthorize("hasAuthority('USER_ROLE')")
     @PutMapping("/{plantId}/{amount}")
     public ApiResponse<BucketResponseDto> addToBucket(@PathVariable UUID plantId, @PathVariable int amount) {

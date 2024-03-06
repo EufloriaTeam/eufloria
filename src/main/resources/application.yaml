@@ -1,4 +1,9 @@
 spring:
+  application:
+    name: Eufloria
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     url: jdbc:postgresql://eufloria-db-eufloria.a.aivencloud.com:11276/eufloria-db?ssl=require&user=avnadmin&password=AVNS_uqvvh_Eoem9yfHXpKeX
     username: avnadmin
