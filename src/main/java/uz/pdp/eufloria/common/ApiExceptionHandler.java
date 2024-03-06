@@ -8,9 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.nio.file.AccessDeniedException;
 import java.util.NoSuchElementException;
@@ -27,6 +30,16 @@ public class ApiExceptionHandler {
     public ResponseEntity<ApiResponse<?>> handleException(ApiException e) {
         ApiResponse<ErrorData> response = ApiResponse.failResponse(e);
         return new ResponseEntity<>(response, e.getStatus());
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ApiResponse<?>> handleException(NoResourceFoundException e) {
+        return new ResponseEntity<>(ApiResponse.respond(false, e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<ApiResponse<?>> handleException(NoHandlerFoundException e) {
+        return new ResponseEntity<>(ApiResponse.respond(false, e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
@@ -66,6 +79,11 @@ public class ApiExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<ApiResponse<?>> handleException(NoSuchElementException e) {
         return new ResponseEntity<>(ApiResponse.respond(false, e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ApiResponse<?>> handleException(HttpRequestMethodNotSupportedException e) {
+        return new ResponseEntity<>(ApiResponse.respond(false, e.getMessage()), HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @ExceptionHandler(Exception.class)
