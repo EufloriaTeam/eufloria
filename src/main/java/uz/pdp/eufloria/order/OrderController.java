@@ -23,9 +23,13 @@ public class OrderController {
 
     @PostMapping("/{shippingId}")
     public ResponseEntity<OrderResponseDto> create(@RequestBody List<BucketItem.BucketId> plantIds, @PathVariable UUID shippingId){
+
+    @PostMapping
+    public ResponseEntity<OrderResponseDto> create(List<BucketItem.BucketId> plantIds, @PathVariable UUID shippingId){
         OrderResponseDto responseDto = orderService.create(plantIds, shippingId);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
+
 
     @GetMapping("/{orderId}")
     public ResponseEntity<OrderResponseDto> get(@PathVariable UUID orderId){
@@ -37,6 +41,7 @@ public class OrderController {
         Page<OrderResponseDto> all = orderService.getAll(predicate, pageable);
         return ResponseEntity.ok(all);
     }
+      
     @PutMapping("/{orderId}")
     public ResponseEntity<OrderResponseDto> update(@PathVariable UUID orderId, @RequestBody @Valid String status) {
         OrderResponseDto responseDto = orderService.update(orderId, status);
