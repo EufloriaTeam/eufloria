@@ -36,20 +36,18 @@ public class CardService extends GenericService<Card, UUID, CardResponseDto, Car
     @Override
     @Transactional
     public CardResponseDto internalCreate(CardCreateDto cardCreateDto) {
-        Card entity = mapper.toEntity(cardCreateDto);
-        if (repository.existsByNumber(entity.getNumber())) {
+        Card card = mapper.toEntity(cardCreateDto);
+        if (repository.existsByNumber(card.getNumber())) {
             throw ApiException.throwException("Number already exist");
         }
-        if (entity.getNumber().length() != 16) {
+        if (card.getNumber().length() != 16) {
             throw ApiException.throwException("Invalid card number entered");
         }
 
-        User user = userRepository.findById(cardCreateDto.getUserId()).orElseThrow(() -> ApiException.throwException("User not found exception"));
+        User user = CommonUtils.getCurrentUser();
 
-        setType(cardCreateDto, entity);
-        entity.setId(UUID.randomUUID());
-        entity.setCvc(getCvc());
-        Card savedCard = repository.save(entity);
+        setType(cardCreateDto, card);
+        Card savedCard = repository.save(card);
         user.getCards().add(savedCard);
         userRepository.save(user);
         return mapper.toResponseDto(savedCard);
@@ -82,14 +80,9 @@ public class CardService extends GenericService<Card, UUID, CardResponseDto, Car
         entity.setType(CardType.valueOf(typeUpper));
     }
 
-    private String getCvc() {
-        return String.valueOf(RANDOM.nextInt(100, 999));
-    }
-
     @Transactional
     public List<Card> getCardsOfUser() {
-        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepository.findByEmail(userEmail).orElseThrow(() -> ApiException.throwException("User not found exception"));
+        User user = CommonUtils.getCurrentUser();
 
         if (user.getCards().isEmpty()) {
             return List.of();

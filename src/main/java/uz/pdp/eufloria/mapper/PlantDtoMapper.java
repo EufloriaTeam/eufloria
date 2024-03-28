@@ -8,13 +8,17 @@ import uz.pdp.eufloria.dto.plant.PlantResponseDto;
 import uz.pdp.eufloria.dto.plant.PlantUpdateDto;
 import uz.pdp.eufloria.entity.Plant;
 
+import java.util.UUID;
+
 @Component
 @RequiredArgsConstructor
 public class PlantDtoMapper extends GenericMapper<Plant, PlantCreateDto, PlantResponseDto,PlantUpdateDto> {
     private final ModelMapper modelMapper;
     @Override
     public Plant toEntity(PlantCreateDto plantCreateDto) {
-        return modelMapper.map(plantCreateDto,Plant.class);
+        Plant plant = modelMapper.map(plantCreateDto, Plant.class);
+        plant.setId(UUID.randomUUID());
+        return plant;
     }
 
     @Override

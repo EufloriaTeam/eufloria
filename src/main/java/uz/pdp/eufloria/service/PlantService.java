@@ -5,12 +5,15 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import uz.pdp.eufloria.common.ApiException;
 import uz.pdp.eufloria.dto.plant.PlantCreateDto;
 import uz.pdp.eufloria.dto.plant.PlantResponseDto;
 import uz.pdp.eufloria.dto.plant.PlantUpdateDto;
+import uz.pdp.eufloria.entity.Image;
 import uz.pdp.eufloria.entity.Plant;
 import uz.pdp.eufloria.entity.User;
 import uz.pdp.eufloria.mapper.PlantDtoMapper;
+import uz.pdp.eufloria.repository.ImageRepository;
 import uz.pdp.eufloria.repository.PlantRepository;
 import uz.pdp.eufloria.security.UserPrincipal;
 
@@ -21,6 +24,7 @@ import java.util.UUID;
 @Getter
 @RequiredArgsConstructor
 public class PlantService extends GenericService<Plant, UUID, PlantResponseDto, PlantCreateDto, PlantUpdateDto> {
+    private final ImageRepository imageRepository;
     private final PlantRepository repository;
     private final Class<Plant> entityClass = Plant.class;
     private final PlantDtoMapper mapper;
@@ -29,11 +33,11 @@ public class PlantService extends GenericService<Plant, UUID, PlantResponseDto, 
     protected PlantResponseDto internalCreate(PlantCreateDto plantCreateDto) {
         UserPrincipal principal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = principal.getUser();
-        user.getFavouritePlants();
         // getFavourites()
 
         Plant plant = mapper.toEntity(plantCreateDto);
-        plant.setId(UUID.randomUUID());
+        plant.setImage(imageRepository.findById(plantCreateDto.getImageId())
+                .orElseThrow(() -> ApiException.throwException("Image not found")));
         Plant saved = repository.save(plant);
         return mapper.toResponseDto(saved);
     }

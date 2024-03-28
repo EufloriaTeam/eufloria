@@ -20,13 +20,14 @@ import java.util.UUID;
 public class OrderController {
     public static final String BASE_URL = "/order";
     private final OrderService orderService;
-    @PostMapping
-    public ResponseEntity<OrderResponseDto> create(List<BucketItem.BucketId> plantIds, @PathVariable UUID shippingId){
+
+    @PostMapping("/{shippingId}")
+    public ResponseEntity<OrderResponseDto> create(@RequestBody List<BucketItem.BucketId> plantIds, @PathVariable UUID shippingId){
         OrderResponseDto responseDto = orderService.create(plantIds, shippingId);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{orderId}")
     public ResponseEntity<OrderResponseDto> get(@PathVariable UUID orderId){
         OrderResponseDto responseDto = orderService.get(orderId);
         return ResponseEntity.ok(responseDto);
@@ -36,7 +37,7 @@ public class OrderController {
         Page<OrderResponseDto> all = orderService.getAll(predicate, pageable);
         return ResponseEntity.ok(all);
     }
-    @PutMapping("/{id}")
+    @PutMapping("/{orderId}")
     public ResponseEntity<OrderResponseDto> update(@PathVariable UUID orderId, @RequestBody @Valid String status) {
         OrderResponseDto responseDto = orderService.update(orderId, status);
         return ResponseEntity.ok(responseDto);
