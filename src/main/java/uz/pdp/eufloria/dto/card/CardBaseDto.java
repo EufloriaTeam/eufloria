@@ -19,4 +19,6 @@ public class CardBaseDto {
     private LocalDate expirationDate;
     @NotNull
     private String number;
+    @NotNull
+    private String cvc;
 }

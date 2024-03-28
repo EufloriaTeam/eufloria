@@ -12,7 +12,7 @@ import uz.pdp.eufloria.service.UserService;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(AppConstants.BASE_PATH + UserController.BASE_URL)
+@RequestMapping(UserController.BASE_URL)
 @RequiredArgsConstructor
 public class UserController {
     public static final String BASE_URL = "/user";

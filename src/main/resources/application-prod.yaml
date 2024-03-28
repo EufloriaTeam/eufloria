@@ -18,7 +18,5 @@ spring:
       token:
         expiration: 86400
         secret: QV9leUa5bTqgfO2xxlITYDnaqrpqsWM37DjVYghhlr5YC+F6LCYhUhUg8gLjx+4C
-  profiles:
-    active: prod
 gsc:
   serviceAccountKeyPath: ${GOOGLE_CLOUD_CREDENTIALS}

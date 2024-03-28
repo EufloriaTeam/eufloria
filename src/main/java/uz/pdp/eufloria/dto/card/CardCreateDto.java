@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
@@ -15,6 +13,4 @@ import java.util.UUID;
 public class CardCreateDto extends CardBaseDto {
     @NotNull
     private String type;
-    @NotNull
-    private UUID userId;
 }

@@ -25,7 +25,7 @@ public class ImageController {
     }
 
     @GetMapping("/{imageId}")
-    public ApiResponse<byte[]> retrieve(@PathVariable UUID imageId) {
-        return ApiResponse.body(imageService.retrieve(imageId));
+    public byte[] retrieve(@PathVariable UUID imageId) {
+        return imageService.retrieve(imageId);
     }
 }

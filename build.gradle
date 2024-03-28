@@ -41,6 +41,13 @@ dependencies {
 
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
+    systemProperty "GOOGLE_CLOUD_CREDENTIALS", System.getenv("GOOGLE_CLOUD_CREDENTIALS")
+}
+
+task showGoogleCloudCredentials {
+    doLast {
+        println project.GOOGLE_CLOUD_CREDENTIALS
+    }
 }

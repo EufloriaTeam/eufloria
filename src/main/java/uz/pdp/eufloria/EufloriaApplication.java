@@ -25,6 +25,7 @@ public class EufloriaApplication {
     private String serviceAccountKeyPath;
 
     public static void main(String[] args) {
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
         SpringApplication.run(EufloriaApplication.class, args);
     }
 

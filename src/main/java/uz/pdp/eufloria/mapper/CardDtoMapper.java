@@ -9,6 +9,8 @@ import uz.pdp.eufloria.dto.card.CardUpdateDto;
 import uz.pdp.eufloria.entity.Card;
 import uz.pdp.eufloria.mapper.GenericMapper;
 
+import java.util.UUID;
+
 @Component
 @RequiredArgsConstructor
 public class CardDtoMapper extends GenericMapper<Card, CardCreateDto, CardResponseDto, CardUpdateDto> {
@@ -16,7 +18,9 @@ public class CardDtoMapper extends GenericMapper<Card, CardCreateDto, CardRespon
 
     @Override
     public Card toEntity(CardCreateDto cardCreateDto) {
-        return mapper.map(cardCreateDto, Card.class);
+        Card card = mapper.map(cardCreateDto, Card.class);
+        card.setId(UUID.randomUUID());
+        return card;
     }
 
     @Override

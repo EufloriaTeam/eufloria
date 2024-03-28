@@ -24,7 +24,7 @@ public class User extends AbsUUIDEntity {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Plant> favouritePlants;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Card> cards;
 
     @ManyToMany(fetch = FetchType.LAZY)
