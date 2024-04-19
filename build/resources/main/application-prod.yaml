@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: Eufloria
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:postgresql://eufloria-db-eufloria.a.aivencloud.com:11276/eufloria-db?ssl=require&user=avnadmin&password=AVNS_uqvvh_Eoem9yfHXpKeX
+    username: avnadmin
+    password: AVNS_uqvvh_Eoem9yfHXpKeX
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  security:
+    jwt:
+      token:
+        expiration: 86400
+        secret: QV9leUa5bTqgfO2xxlITYDnaqrpqsWM37DjVYghhlr5YC+F6LCYhUhUg8gLjx+4C
+gsc:
+  serviceAccountKeyPath: ${GOOGLE_CLOUD_CREDENTIALS}
