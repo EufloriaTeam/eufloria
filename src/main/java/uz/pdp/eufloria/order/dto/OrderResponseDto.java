@@ -2,8 +2,8 @@ package uz.pdp.eufloria.order.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Data;
 import uz.pdp.eufloria.entity.enums.OrderStatus;
-
 import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
