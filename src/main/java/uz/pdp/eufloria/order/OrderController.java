@@ -23,9 +23,6 @@ public class OrderController {
 
     @PostMapping("/{shippingId}")
     public ResponseEntity<OrderResponseDto> create(@RequestBody List<BucketItem.BucketId> plantIds, @PathVariable UUID shippingId){
-
-    @PostMapping
-    public ResponseEntity<OrderResponseDto> create(List<BucketItem.BucketId> plantIds, @PathVariable UUID shippingId){
         OrderResponseDto responseDto = orderService.create(plantIds, shippingId);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
