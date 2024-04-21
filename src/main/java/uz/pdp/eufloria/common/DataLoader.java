@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import uz.pdp.eufloria.entity.Image;
 import uz.pdp.eufloria.entity.Role;
 import uz.pdp.eufloria.entity.User;
+import uz.pdp.eufloria.repository.ImageRepository;
 import uz.pdp.eufloria.repository.RoleRepository;
 import uz.pdp.eufloria.repository.UserRepository;
 
@@ -19,9 +21,11 @@ public class DataLoader implements CommandLineRunner {
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String ddlMode;
 
+    private static Image defaultPlantImage;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
+    private final ImageRepository imageRepository;
 
     @Override
     public void run(String... args) {
@@ -40,6 +44,12 @@ public class DataLoader implements CommandLineRunner {
             userRepository.save(superAdminUser);
             userRepository.save(adminUser);
             userRepository.save(user);
+        } else {
+            defaultPlantImage = imageRepository.findByName("default-plant").get(0);
         }
+    }
+
+    public static Image getDefaultPlantImage() {
+        return defaultPlantImage;
     }
 }

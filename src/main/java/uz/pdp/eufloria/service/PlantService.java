@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import uz.pdp.eufloria.common.ApiException;
+import uz.pdp.eufloria.common.DataLoader;
 import uz.pdp.eufloria.dto.plant.PlantCreateDto;
 import uz.pdp.eufloria.dto.plant.PlantResponseDto;
 import uz.pdp.eufloria.dto.plant.PlantUpdateDto;
@@ -18,6 +19,7 @@ import uz.pdp.eufloria.repository.PlantRepository;
 import uz.pdp.eufloria.security.UserPrincipal;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -36,8 +38,11 @@ public class PlantService extends GenericService<Plant, UUID, PlantResponseDto, 
         // getFavourites()
 
         Plant plant = mapper.toEntity(plantCreateDto);
-        plant.setImage(imageRepository.findById(plantCreateDto.getImageId())
-                .orElseThrow(() -> ApiException.throwException("Image not found")));
+        if (Objects.nonNull(plantCreateDto.getImageId())) {
+            plant.setImage(imageRepository.findById(plantCreateDto.getImageId())
+                    .orElseThrow(() -> ApiException.throwException("Image not found")));
+        } else
+            plant.setImage(DataLoader.getDefaultPlantImage());
         Plant saved = repository.save(plant);
         return mapper.toResponseDto(saved);
     }

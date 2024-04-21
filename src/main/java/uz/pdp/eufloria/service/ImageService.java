@@ -15,6 +15,7 @@ import uz.pdp.eufloria.entity.User;
 import uz.pdp.eufloria.repository.ImageRepository;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -25,15 +26,15 @@ public class ImageService {
     private final Storage storage;
 
     public Image uploadImage(@RequestPart(name = "file") MultipartFile file) throws IOException {
-        String fileName = file.getOriginalFilename();
-        BlobId blobId = BlobId.of(AppConstants.BUCKET_NAME, Objects.requireNonNull(fileName));
+        String originalFilename = file.getOriginalFilename();
+        BlobId blobId = BlobId.of(AppConstants.BUCKET_NAME, Objects.requireNonNull(originalFilename));
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(file.getContentType()).build();
         storage.create(blobInfo, file.getBytes());
 
         Image image = new Image(
                 UUID.randomUUID(),
-                file.getName(),
-                file.getOriginalFilename(),
+                originalFilename.substring(0, originalFilename.indexOf(".")),
+                originalFilename,
                 file.getContentType(),
                 file.getSize());
 
@@ -46,5 +47,9 @@ public class ImageService {
         BlobId blobId = BlobId.of(AppConstants.BUCKET_NAME, image.getOriginalName());
         Blob blob = storage.get(blobId);
         return blob.getContent();
+    }
+
+    public List<Image> getAll() {
+        return imageRepository.findAll();
     }
 }

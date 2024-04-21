@@ -10,6 +10,7 @@ import uz.pdp.eufloria.entity.Image;
 import uz.pdp.eufloria.service.ImageService;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -27,5 +28,10 @@ public class ImageController {
     @GetMapping("/{imageId}")
     public byte[] retrieve(@PathVariable UUID imageId) {
         return imageService.retrieve(imageId);
+    }
+
+    @GetMapping
+    public ApiResponse<List<Image>> getAll() {
+        return ApiResponse.body(imageService.getAll());
     }
 }
