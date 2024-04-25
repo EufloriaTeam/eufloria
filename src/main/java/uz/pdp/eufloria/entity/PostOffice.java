@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -26,8 +27,8 @@ public class PostOffice {
     private Address address;
 
     @Column(nullable = false)
-    private LocalDateTime openTime;
+    private LocalTime openTime;
 
     @Column(nullable = false)
-    private LocalDateTime closeTime;
+    private LocalTime closeTime;
 }
