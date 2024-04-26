@@ -12,8 +12,9 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class PlantDtoMapper extends GenericMapper<Plant, PlantCreateDto, PlantResponseDto,PlantUpdateDto> {
+public class PlantDtoMapper extends GenericMapper<Plant, PlantCreateDto, PlantResponseDto, PlantUpdateDto> {
     private final ModelMapper modelMapper;
+
     @Override
     public Plant toEntity(PlantCreateDto plantCreateDto) {
         Plant plant = modelMapper.map(plantCreateDto, Plant.class);
@@ -28,6 +29,6 @@ public class PlantDtoMapper extends GenericMapper<Plant, PlantCreateDto, PlantRe
 
     @Override
     public void toEntity(PlantUpdateDto plantUpdateDto, Plant plant) {
-    modelMapper.map(plantUpdateDto,plant);
+        modelMapper.map(plantUpdateDto, plant);
     }
 }

@@ -33,4 +33,5 @@ public class UserService {
         page = specification == null ? repository.findAll(pageable) : repository.findAll(specification, pageable);
         return page.map(mapper::toResponseDto);
     }
+
 }

@@ -1,4 +1,4 @@
 
-r	java:S116 "VRename this field "EntityClass" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(с¶ќЭ8Є”ЫТа1
->
-java:S1170 "!Make this final field static too.(с¶ќЭ8Є”ЫТа1
+	java:S116!"VRename this field "EntityClass" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(с¶ќЭ8Є”ЫТа1J$24219e8f-8dd0-46cd-9b36-44c37861cf6b
+d
+java:S1170!"!Make this final field static too.(с¶ќЭ8Є”ЫТа1J$a8c90ea6-c639-4f43-b19f-c6155858e0f7
