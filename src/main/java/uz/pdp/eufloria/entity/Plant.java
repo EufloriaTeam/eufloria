@@ -1,8 +1,6 @@
 package uz.pdp.eufloria.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,6 +18,6 @@ public class Plant extends AbsUUIDEntity {
     private String description;
     private double price;
     private double discount;
-    @OneToOne
+    @ManyToOne
     private Image image;
 }

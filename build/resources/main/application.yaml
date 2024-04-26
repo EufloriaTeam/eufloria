@@ -5,20 +5,18 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   datasource:
-    url: jdbc:postgresql://eufloria-db-eufloria.a.aivencloud.com:11276/eufloria-db?ssl=require&user=avnadmin&password=AVNS_uqvvh_Eoem9yfHXpKeX
-    username: avnadmin
-    password: AVNS_uqvvh_Eoem9yfHXpKeX
+    url: jdbc:postgresql://localhost:5432/eufloria_db
+    username: postgres
+    password: 5825
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
   security:
     jwt:
       token:
         expiration: 86400
         secret: QV9leUa5bTqgfO2xxlITYDnaqrpqsWM37DjVYghhlr5YC+F6LCYhUhUg8gLjx+4C
-  profiles:
-    active: prod
 gsc:
   serviceAccountKeyPath: ${GOOGLE_CLOUD_CREDENTIALS}
